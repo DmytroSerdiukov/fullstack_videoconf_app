@@ -3,8 +3,10 @@ import http from 'http'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import userRoutes from './routes/user'
-
+import {MongoClient} from 'mongodb'
 const app = express()
+
+const mongo_client = MongoClient()
 // const HTTP = http.Server(app) 
 
 app.use(bodyParser.urlencoded({ extended: false }))

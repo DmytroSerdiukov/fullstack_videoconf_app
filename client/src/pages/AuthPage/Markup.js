@@ -4,6 +4,7 @@ import { Field, reduxForm } from 'redux-form'
 
 const AuthForm = (props) => {
     const {handleSubmit} = props
+
     return <form onSubmit={handleSubmit}>
         <Field component='input' type='text' name='email' placeholder='E-mail'/>
         <Field component='input' type='text' name='password' placeholder='Password' />
