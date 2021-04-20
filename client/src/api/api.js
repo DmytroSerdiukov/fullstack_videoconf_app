@@ -2,16 +2,18 @@ import axios from 'axios'
 
 const UserAPI = {
     authMe: async(data) => {
-        await axios.post("https://localhost:5000", {
-        title:'User Data',
-        body:{
+        const body = {
+            title:'User Data',
+            user: {
             password: data.password,
             email: data.email
-        }})
+        }}
+        const response = await axios.post("http://localhost:5000/auth", body)
+        return response
     },
     
     getUserProfile: async() => {
-        await axios.get("https://localhost:5000/profile:id")
+        await axios.get("http://localhost:5000/profile:id")
     }
 }
 
