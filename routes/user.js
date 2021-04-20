@@ -6,9 +6,17 @@ router.post('/register', (req, res) => {
   res.send('register')
 })
 
-router.post('/auth', (req, res) => {
-  res.send('auth')
+router.post('/auth', async(req, res) => {
+  try {
+    return res.status(201).json({
+      message: 'data received',
+      status: 1
+    })
+  } catch(e) {
+    throw e
+  }
 })
+ 
 
 router.get('/profile', (req, res) => {
   res.send('profile')

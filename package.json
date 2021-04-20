@@ -14,12 +14,15 @@
   "dependencies": {
     "axios": "^0.21.1",
     "babel-core": "^6.26.3",
+    "body-parser": "^1.19.0",
     "concurrently": "^6.0.2",
     "cors": "^2.8.5",
     "create-react-app": "^4.0.3",
     "express": "^4.17.1",
     "http": "^0.0.1-security",
-    "nodemon": "^2.0.7"
+    "mongodb": "^3.6.6",
+    "nodemon": "^2.0.7",
+    "redux-form": "^8.3.7"
   },
   "devDependencies": {
     "@babel/core": "^7.13.15",
