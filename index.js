@@ -3,10 +3,10 @@ import http from 'http'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import userRoutes from './routes/user'
-import {MongoClient} from 'mongodb'
+import mongo from 'mongoose'
+
 const app = express()
 
-const mongo_client = MongoClient()
 // const HTTP = http.Server(app) 
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -19,9 +19,14 @@ app.use(cors())
 app.use('/', userRoutes)
 
 const startServer = async() => {
-    await app.listen(5000, () => {
-        console.log('server started on 5000 port')
-    })
+  const db = await mongo.connect('mongodb://localhost/test', {useNewUrlParser: true, useUnifiedTopology: true})
+  db.on('error', console.error.bind(console, 'connection error:'));
+  db.once('open', function() {
+    console.log('db connection is created')
+  });
+  await app.listen(5000, () => {
+      console.log('server started on 5000 port')
+  })
 }
 
 startServer()

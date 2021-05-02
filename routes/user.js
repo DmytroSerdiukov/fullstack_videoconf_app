@@ -4,8 +4,7 @@ const router = Router()
 
 router.post('/register', async(req, res) => {
   try {
-    console.log(req.body)
-    return res.status(201).json({
+     return res.status(201).json({
       message: 'USER_CREATED',
       status: 1
     })
