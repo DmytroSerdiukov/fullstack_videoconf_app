@@ -19,13 +19,11 @@ app.use(cors())
 app.use('/', userRoutes)
 
 const startServer = async() => {
-  const db = await mongo.connect('mongodb://localhost/test', {useNewUrlParser: true, useUnifiedTopology: true})
-  db.on('error', console.error.bind(console, 'connection error:'));
-  db.once('open', function() {
-    console.log('db connection is created')
-  });
+  const db = await mongo.connect('mongodb+srv://Dmytro:1234@cluster0.pix6q.mongodb.net/videoconfapp?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true})
+  .then( () => console.log('connected'))
+
   await app.listen(5000, () => {
-      console.log('server started on 5000 port')
+    console.log('server started on 5000 port')
   })
 }
 

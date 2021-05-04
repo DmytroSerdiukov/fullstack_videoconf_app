@@ -7,6 +7,7 @@ const RegisterForm = (props) => {
 
     return <form onSubmit={handleSubmit}>
         <Field component='input' type='text' name='firstname' placeholder='First Name' />
+        <Field component='input' type='text' name='middlename' placeholder='Middle Name' />
         <Field component='input' type='text' name='lastname' placeholder='Last Name' />
         <Field component='input' type='text' name='email' placeholder='E-mail'/>
         <Field component='input' type='text' name='password' placeholder='Password' />

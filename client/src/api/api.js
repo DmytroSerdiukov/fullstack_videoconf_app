@@ -13,14 +13,15 @@ const UserAPI = {
     },
     
     registerMe: async(data) => {
+        console.log(data)
         const body = {
             title:'USER_DATA',
             user: {
-                firstName: data.firstname,
-                lastName: data.lastname,
+                firstname: data.firstname,
+                middlename: data.middlename,
+                lastname: data.lastname,
                 email: data.email,
                 password: data.password,
-                repeatPassword: data.repeatpassword
             }
         }
         const response = await axios.post("http://localhost:5000/register", body)
