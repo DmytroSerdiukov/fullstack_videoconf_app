@@ -33,6 +33,18 @@ router.get('/profile', (req, res) => {
   res.send('profile')
 })
 
+router.get('/users', async(req, res) => {
+  try {
+    const users = await UserAPI.getUsers()
+    return res.status(200).json({
+      users: users
+    })
+  } catch (e) {
+    throw e
+  }
+})
+
+
 
 
 export default router;

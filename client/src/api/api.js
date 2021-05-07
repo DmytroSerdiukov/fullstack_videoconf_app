@@ -30,6 +30,11 @@ const UserAPI = {
 
     getUserProfile: async() => {
         await axios.get("http://localhost:5000/profile:id")
+    },
+    
+    getUsers: async() => {
+        const users = await axios.get("http://localhost:5000/users")
+        return users
     }
 }
 

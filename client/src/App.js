@@ -6,6 +6,7 @@ import AuthPage from './pages/AuthPage/Container';
 import RegisterPage from './pages/Register/Container';
 import ProfilePage from './pages/Profile/Container';
 import {setAuth} from './reducers/auth'
+import UsersPage from './pages/UsersPage/Container';
 
 
 function App({authIn, setAuth}) {
@@ -33,6 +34,9 @@ function App({authIn, setAuth}) {
             </Route>
             <Route exact path="/profile">
               <ProfilePage />
+            </Route>
+            <Route exact path="/users">
+              <UsersPage />
             </Route>
           </Switch>
      </div>

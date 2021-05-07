@@ -28,6 +28,11 @@ const UserAPI = {
 
     getUser: async() => {
 
+    },
+
+    getUsers: async() => {
+        const users = await User.find()
+        return users
     }
 }
 

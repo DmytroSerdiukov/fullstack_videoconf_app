@@ -6,7 +6,7 @@ import { Field, reduxForm } from 'redux-form'
 const AuthForm = (props) => {
     const {handleSubmit} = props
     const [value, setRedirect] = useState(false)
-    return <>{value ? <Redirect to="/register"/> : 
+    return <>{value ? <Redirect to="/register" /> : 
         <>
             <form onSubmit={handleSubmit}>
                 <Field component='input' type='text' name='email' placeholder='E-mail'/>
