@@ -19,10 +19,10 @@ router.post('/register', async(req, res) => {
 
 router.post('/auth', async(req, res) => {
   try {
-    return res.status(201).json({
-      message: 'AUTH_COMPLETED',
-      status: 1
-    })
+    const response = await UserAPI.authUser(req.body)
+    if(response.status === 1)
+      return res.status(201).json(response)
+    return res.status(400).json(response)
   } catch(e) {
     throw e
   }

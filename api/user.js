@@ -22,8 +22,19 @@ const UserAPI = {
         return 1
     },
 
-    authUser: async() => { 
-
+    authUser: async(body) => { 
+        const userData = body.user
+        const {email, password} = userData
+        const user = await User.findOne({email: email})
+        if (user.password == password)
+            return {
+                message: 'AUTH_COMPLETED',
+                status: 1
+            }
+        return {
+            message: 'AUTH_FAILED',
+            status: 0
+        }
     },
 
     getUser: async() => {
