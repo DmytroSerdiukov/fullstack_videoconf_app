@@ -10,10 +10,11 @@ import { connect } from 'react-redux'
 const AuthPageContainer = ({authIn, setAuth}) => {
 
     const authMe = async(data) => {
+        const value = new Date().getSeconds().toString()
         await UserAPI.authMe(data)
         .then(res => {
             if (res.data.status == 1)
-                Cookies.set('user', 'loginTrue')
+                Cookies.set('user', value)
                 setAuth(true)
         })
         .catch(e => console.log('err',e))
@@ -27,9 +28,4 @@ const AuthPageContainer = ({authIn, setAuth}) => {
     </>
 }
 
-// let props = (state) => ({
-//     authIn: state.auth.authIn
-// })
-
-// export default connect(props, {setAuth})(AuthPageContainer)
 export default AuthPageContainer
