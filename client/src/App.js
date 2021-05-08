@@ -7,6 +7,7 @@ import RegisterPage from './pages/Register/Container';
 import ProfilePage from './pages/Profile/Container';
 import {setAuth} from './reducers/auth'
 import UsersPage from './pages/UsersPage/Container';
+import Navigation from './pages/Navigation/Markup';
 
 
 function App({authIn, setAuth}) {
@@ -25,6 +26,7 @@ function App({authIn, setAuth}) {
   return (
     <BrowserRouter>
       <div>
+          <Navigation />
           <Switch>
             <Route exact path="/">
               <AuthPage authIn={authIn} setAuth={setAuth}/>
