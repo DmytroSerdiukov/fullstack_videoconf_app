@@ -1,5 +1,7 @@
 import * as axios from 'axios'
-import { User } from '../models/user'
+import mongoose, { Schema } from 'mongoose'
+import { ObjectId } from 'bson'
+import { User, Friendship } from '../models/user'
 
 
 const UserAPI = {
@@ -29,7 +31,8 @@ const UserAPI = {
         if (user.password == password)
             return {
                 message: 'AUTH_COMPLETED',
-                status: 1
+                status: 1,
+                userId: user._id
             }
         return {
             message: 'AUTH_FAILED',
@@ -44,7 +47,61 @@ const UserAPI = {
     getUsers: async() => {
         const users = await User.find()
         return users
+    },
+    
+    makeFriendshipRequest: async(body) => {
+        try {
+            const {userA, userB} = body
+            const sender = await Friendship.findOneAndUpdate(
+                {
+                    requester: userA,
+                    recipient: userB
+                },
+                { $set: {status: 1} },
+                { upsert: true, new: true }
+    
+            )
+            console.log(sender)
+    
+            const accepter = await Friendship.findOneAndUpdate(
+                {
+                    requester: userB, //ID
+                    recipient: userA
+                },
+                { $set: {status: 2} },
+                { upsert: true, new: true }
+            )
+            console.log(accepter)
+        } catch (e) {
+            console.log(e.message)
+        }
+    },
+
+    acceptFriendshipRequest: async(body) => {
+        try{
+
+        } catch (e) {
+            console.log(e.message)
+        }
     }
+
 }
+
+
+// export const Friendship = model('Friendship', Schema({
+//     requester: { type: Schema.Types.ObjectId, ref: 'User'}, //ID
+//     recipient: { type: Schema.Types.ObjectId, ref: 'User'}, //ID
+//     status: {
+//         type: Number,
+//         enums: [
+//             0,    //'add friend',
+//             1,    //'requested',
+//             2,    //'pending',
+//             3,    //'friends'
+//         ]
+//     }
+// })) 
+
+
 
 export default UserAPI

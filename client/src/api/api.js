@@ -1,4 +1,5 @@
 import axios from 'axios'
+const URL = "http://localhost:5000"
 
 const UserAPI = {
     authMe: async(data) => {
@@ -8,7 +9,7 @@ const UserAPI = {
             email: data.email,
             password: data.password
         }}
-        const response = await axios.post("http://localhost:5000/auth", body)
+        const response = await axios.post(`${URL}/auth`, body)
         return response
     },
     
@@ -24,18 +25,36 @@ const UserAPI = {
                 password: data.password,
             }
         }
-        const response = await axios.post("http://localhost:5000/register", body)
+        const response = await axios.post(`${URL}/register`, body)
         return response
     },
 
-    getUserProfile: async() => {
-        await axios.get("http://localhost:5000/profile:id")
+    getUserProfile: async(id) => {
+        await axios.get(`${URL}/profile:${id}`)
     },
     
     getUsers: async() => {
-        const users = await axios.get("http://localhost:5000/users")
+        const users = await axios.get(`${URL}/users`)
         return users
-    }
+    },
+
+    makeFriendship: async(senderId, accepterId) => {
+        try{
+            const body = {
+                userA: senderId,
+                userB: accepterId
+            }
+            await axios.post(`${URL}/users/add/:${accepterId}`, body)
+        } catch(e) {
+            console.log(e)
+        }
+    },
+
+    breakFriendship: async() => {
+
+    },
+
+
 }
 
 export default UserAPI

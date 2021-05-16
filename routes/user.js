@@ -44,6 +44,15 @@ router.get('/users', async(req, res) => {
   }
 })
 
+router.post('/users/add/:id', async(req, res) => {
+  try {
+    const body = req.body
+    await UserAPI.makeFriendshipRequest(body)
+    res.json({msg: 'Friendship request sended'})
+  } catch (e) {
+    console.log(e.message)
+  }
+})
 
 
 
