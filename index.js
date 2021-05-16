@@ -1,12 +1,14 @@
 import express from 'express'
-import http from 'http'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import userRoutes from './routes/user'
 import mongo from 'mongoose'
+import io from 'socket.io'
+import httpServer from 'http'
 
 const app = express()
-
+const server = httpServer.createServer(app)
+const socket = io(server)
 // const HTTP = http.Server(app) 
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -19,7 +21,12 @@ app.use(cors())
 app.use('/', userRoutes)
 
 const startServer = async() => {
-  const db = await mongo.connect('mongodb+srv://Dmytro:1234@cluster0.pix6q.mongodb.net/videoconfapp?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true})
+  await mongo.connect('mongodb+srv://Dmytro:1234@cluster0.pix6q.mongodb.net/videoconfapp?retryWrites=true&w=majority',
+    {
+      useNewUrlParser: true,
+     useUnifiedTopology: true,
+     useFindAndModify: false
+    })
   .then( () => console.log('connected'))
 
   await app.listen(5000, () => {
