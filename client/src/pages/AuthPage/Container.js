@@ -3,19 +3,18 @@ import UserAPI from '../../api/api'
 import AuthPageMarkup from './Markup'
 import {Redirect} from 'react-router-dom'
 import Cookies from 'js-cookie'
-import { setAuth } from '../../reducers/auth'
-import { connect } from 'react-redux'
 
 
-const AuthPageContainer = ({authIn, setAuth}) => {
-
+const AuthPageContainer = ({userId, authIn, setAuth, setUserId}) => {
     const authMe = async(data) => {
-        const value = new Date().getSeconds().toString()
+
         await UserAPI.authMe(data)
         .then(res => {
-            if (res.data.status == 1)
-                Cookies.set('user', value)
+            if (res.data.status == 1) {
+                setUserId(res.data.userId)
+                Cookies.set('user', res.data.userId)
                 setAuth(true)
+            }
         })
         .catch(e => console.log('err',e))
     }
@@ -27,5 +26,7 @@ const AuthPageContainer = ({authIn, setAuth}) => {
         }
     </>
 }
+
+
 
 export default AuthPageContainer

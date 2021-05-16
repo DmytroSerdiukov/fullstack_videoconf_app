@@ -5,12 +5,13 @@ import Cookies from 'js-cookie';
 import AuthPage from './pages/AuthPage/Container';
 import RegisterPage from './pages/Register/Container';
 import ProfilePage from './pages/Profile/Container';
-import {setAuth} from './reducers/auth'
+import {setAuth, setUserId} from './reducers/auth'
 import UsersPage from './pages/UsersPage/Container';
 import Navigation from './pages/Navigation/Markup';
+import FriendsPage from './pages/Friends/Container';
 
 
-function App({authIn, setAuth}) {
+function App({userId, authIn, setAuth, setUserId}) {
 
   useEffect( () => {
     readCookie()
@@ -26,10 +27,15 @@ function App({authIn, setAuth}) {
   return (
     <BrowserRouter>
       <div>
-          <Navigation />
+          <Navigation authIn={authIn}/>
           <Switch>
             <Route exact path="/">
-              <AuthPage authIn={authIn} setAuth={setAuth}/>
+              <AuthPage 
+                authIn={authIn}
+                userId={userId}
+                setAuth={setAuth}
+                setUserId={setUserId}
+              />
             </Route>
             <Route exact path="/register">
               <RegisterPage />
@@ -40,6 +46,9 @@ function App({authIn, setAuth}) {
             <Route exact path="/users">
               <UsersPage />
             </Route>
+            <Route exact path="/friends">
+              <FriendsPage />
+            </Route>
           </Switch>
      </div>
     </BrowserRouter>
@@ -48,8 +57,9 @@ function App({authIn, setAuth}) {
 }
 
 let props = (state) => ({
-  authIn: state.auth.authIn
+  authIn: state.auth.authIn,
+  userId: state.auth.userId
 })
 
 
-export default connect(props, {setAuth})(App);
+export default connect(props, {setAuth, setUserId})(App);

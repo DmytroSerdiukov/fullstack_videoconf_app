@@ -2,10 +2,14 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 
-const Navigation = () => {
+const Navigation = ({authIn}) => {
     return <>
-        <Link to='/profile'>Profile</Link>
-        <Link to='/users'>Users</Link>
+        {authIn ?
+        <div>
+            <Link to='/profile'>Profile</Link>
+            <Link to='/users'>Users</Link>
+        </div>
+        : null}
     </>
 }
 
