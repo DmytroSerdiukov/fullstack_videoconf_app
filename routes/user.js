@@ -24,7 +24,7 @@ router.post('/auth', async(req, res) => {
       return res.status(201).json(response)
     return res.status(400).json(response)
   } catch(e) {
-    throw e
+    console.log(e.message)
   }
 })
  
@@ -42,6 +42,19 @@ router.get('/users', async(req, res) => {
   } catch (e) {
     throw e
   }
+})
+
+router.get('/friends', async(req, res) => {
+  try {
+    console.log(req)
+    const id = req.body.userId
+    const friends = await UserAPI.getFriends(id)
+    console.log(friends)
+    res.status(200).json({message: 'friends', friends: friends})
+  } catch (e) {
+    console.log(e.message)
+  }
+
 })
 
 router.post('/users/add/:id', async(req, res) => {

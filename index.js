@@ -1,40 +1,57 @@
-import express from 'express'
-import cors from 'cors'
-import bodyParser from 'body-parser'
-import userRoutes from './routes/user'
-import mongo from 'mongoose'
 import io from 'socket.io'
+import cors from 'cors'
+import mongo from 'mongoose'
+import express from 'express'
+import bodyParser from 'body-parser'
 import httpServer from 'http'
+
+import userRoutes from './routes/user'
 
 const app = express()
 const server = httpServer.createServer(app)
-const socket = io(server)
-// const HTTP = http.Server(app) 
+const socket = io(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    credentials: true
+  }
+})
 
 app.use(bodyParser.urlencoded({ extended: false }))
- 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-app.use(cors())
-app.use('/', userRoutes)
+
+    app.use(bodyParser.json())
+    app.use(bodyParser.urlencoded({
+      extended: true
+    }));
+    app.use(cors())
+    app.use('/', userRoutes)
 
 const startServer = async() => {
-  await mongo.connect('mongodb+srv://Dmytro:1234@cluster0.pix6q.mongodb.net/videoconfapp?retryWrites=true&w=majority',
-    {
-      useNewUrlParser: true,
-     useUnifiedTopology: true,
-     useFindAndModify: false
+  try {
+    await mongo.connect('mongodb+srv://Dmytro:1234@cluster0.pix6q.mongodb.net/videoconfapp?retryWrites=true&w=majority',
+      {
+        useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false
+      })
+    .then( () => console.log('connected'))
+    await server.listen(5000, () => {
+      console.log('server started on 5000 port')
     })
-  .then( () => console.log('connected'))
-
-  await app.listen(5000, () => {
-    console.log('server started on 5000 port')
-  })
+  } catch (e) {
+    console.log(e.message)
+  }
 }
 
 startServer()
+
+socket.once('connection', sock => {
+  console.log('user connected')
+
+  sock.on('disconnect', () => {
+    console.log('user connected')
+  })
+})
+
 
 process.once('SIGUSR2', function () {
     process.kill(process.pid, 'SIGUSR2');

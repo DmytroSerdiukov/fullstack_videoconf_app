@@ -77,9 +77,13 @@ const UserAPI = {
         }
     },
 
-    acceptFriendshipRequest: async(body) => {
+    getFriends: async(id) => {
         try{
-
+            console.log(id)
+            const friends = await Friendship.find(
+                
+            )
+            return friends
         } catch (e) {
             console.log(e.message)
         }

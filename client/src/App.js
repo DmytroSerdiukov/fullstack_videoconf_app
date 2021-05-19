@@ -2,13 +2,15 @@ import React, { useEffect } from 'react'
 import {BrowserRouter, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux';
 import Cookies from 'js-cookie';
+
 import AuthPage from './pages/AuthPage/Container';
 import RegisterPage from './pages/Register/Container';
 import ProfilePage from './pages/Profile/Container';
-import {setAuth, setUserId} from './reducers/auth'
 import UsersPage from './pages/UsersPage/Container';
 import Navigation from './pages/Navigation/Markup';
 import FriendsPage from './pages/Friends/Container';
+import Videoconference from './pages/Videoconference/Container';
+import {setAuth, setUserId} from './reducers/auth'
 
 
 function App({userId, authIn, setAuth, setUserId}) {
@@ -48,6 +50,9 @@ function App({userId, authIn, setAuth, setUserId}) {
             </Route>
             <Route exact path="/friends">
               <FriendsPage />
+            </Route>
+            <Route exact path="/video">
+              <Videoconference />
             </Route>
           </Switch>
      </div>

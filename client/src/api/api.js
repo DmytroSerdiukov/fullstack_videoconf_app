@@ -37,6 +37,21 @@ const UserAPI = {
         const users = await axios.get(`${URL}/users`)
         return users
     },
+    
+    getFriends: async(id) => {
+        try {
+            const body = {
+                userId: id
+            }
+            console.log(body)
+            const friends = await axios.get(`${URL}/friends`, body)
+            return friends
+        } catch (e) {
+            console.log(e)
+        }
+
+    }
+    ,
 
     makeFriendship: async(senderId, accepterId) => {
         try{
