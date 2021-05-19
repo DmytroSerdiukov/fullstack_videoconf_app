@@ -1,6 +1,6 @@
 import {Router} from 'express'
 import UserAPI from '../api/user'
-import User from '../models/user'
+import {User} from '../models/user'
 
 
 
@@ -29,8 +29,17 @@ router.post('/auth', async(req, res) => {
 })
  
 
-router.get('/profile', (req, res) => {
-  res.send('profile')
+router.post('/profile', async(req, res) => {
+  try {
+    console.log(req.body)
+    const profile = await User.findOne({_id: req.body.id})
+    console.log(profile)
+    res.status(200).json({profile: profile})
+  } catch (e) {
+    res.status(400).json({
+      message: e.message
+    })
+  }
 })
 
 router.get('/users', async(req, res) => {

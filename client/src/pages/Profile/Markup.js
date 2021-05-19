@@ -4,15 +4,19 @@ import { Redirect } from 'react-router'
 import { Link } from 'react-router-dom'
 
 
-const UserData = () => {
+const UserData = ({profile}) => {
+    if(profile != null) {
     return <>
-    <div>firstname</div>
-    <div>lastname</div>
-    <div>email</div>
+        <h1>{profile.firstname}</h1>
+        <h1>{profile.lastname}</h1>
     </>
+    }
+    else {
+        return <div>problem with data</div>
+    }
 }
 
-const ProfileMarkup = ({authIn, userId, setAuth}) => {
+const ProfileMarkup = ({profile, authIn, userId, setAuth}) => {
 
     const unloginUser = () => {
         Cookies.remove('user')
@@ -25,7 +29,7 @@ const ProfileMarkup = ({authIn, userId, setAuth}) => {
                 authIn ? <button onClick={unloginUser}>Unlogin</button> :
                 <Redirect to='/' />
             }
-            <UserData />
+            <UserData profile={profile}/>
         </div>
     </>
 }

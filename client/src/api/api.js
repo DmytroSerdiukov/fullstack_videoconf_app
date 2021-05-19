@@ -32,6 +32,14 @@ const UserAPI = {
     getUserProfile: async(id) => {
         await axios.get(`${URL}/profile:${id}`)
     },
+
+    getMyProfile: async(id) => {
+        const body = {
+            id: id
+        }
+        const profile = await axios.post(`${URL}/profile`, body)
+        return profile
+    },
     
     getUsers: async() => {
         const users = await axios.get(`${URL}/users`)
