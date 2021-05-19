@@ -8,6 +8,7 @@ const Navigation = ({authIn}) => {
         <div>
             <Link to='/profile'>Profile</Link>
             <Link to='/users'>Users</Link>
+            <Link to='/videoconferences'>Videoconferences</Link>
         </div>
         : null}
     </>

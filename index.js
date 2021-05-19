@@ -4,7 +4,7 @@ import mongo from 'mongoose'
 import express from 'express'
 import bodyParser from 'body-parser'
 import httpServer from 'http'
-
+import videoconfRoutes from './routes/videoconferences'
 import userRoutes from './routes/user'
 
 const app = express()
@@ -24,6 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
     }));
     app.use(cors())
     app.use('/', userRoutes)
+    app.use('/', videoconfRoutes)
 
 const startServer = async() => {
   try {

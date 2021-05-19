@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 import {model} from 'mongoose'
 
 const Schema = mongoose.Schema
-
+const ObjectId = Schema.Types.ObjectId
 
 export const User = model('User', Schema({
     firstname: String,
@@ -10,7 +10,8 @@ export const User = model('User', Schema({
     lastname: String,
     email: String,
     password: String,
-    friends: [{type: Schema.Types.ObjectId, ref: 'Friendship'}]
+    friends: [{type: Schema.Types.ObjectId, ref: 'Friendship'}],
+    videoconferences: [{type: ObjectId, ref: 'Videoconference'}]
 }))
 
 
@@ -27,4 +28,15 @@ export const Friendship = model('Friendship', Schema({
             3,    //'friends'
         ]
     }
-})) 
+}))
+ 
+
+
+
+export const Videoconference = model('Videoconference', Schema({
+    id: Schema.Types.ObjectId,
+    userId: Schema.Types.ObjectId,
+    conferenceLabel: String,
+    users: [{type: Schema.Types.ObjectId, ref: 'User'}]
+}))
+
