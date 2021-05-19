@@ -11,6 +11,7 @@ import Navigation from './pages/Navigation/Markup';
 import FriendsPage from './pages/Friends/Container';
 import Videoconference from './pages/Videoconference/Container';
 import {setAuth, setUserId} from './reducers/auth'
+import Videoconferences from './pages/Videoconferences/Container';
 
 
 function App({userId, authIn, setAuth, setUserId}) {
@@ -53,6 +54,9 @@ function App({userId, authIn, setAuth, setUserId}) {
             </Route>
             <Route exact path="/video">
               <Videoconference />
+            </Route>
+            <Route exact path="/videoconferences">
+              <Videoconferences />
             </Route>
           </Switch>
      </div>
