@@ -12,6 +12,7 @@ import FriendsPage from './pages/Friends/Container';
 import Videoconference from './pages/Videoconference/Container';
 import {setAuth, setUserId} from './reducers/auth'
 import Videoconferences from './pages/Videoconferences/Container';
+import Messages from './pages/Messages/Container';
 
 
 function App({userId, authIn, setAuth, setUserId}) {
@@ -57,6 +58,9 @@ function App({userId, authIn, setAuth, setUserId}) {
             </Route>
             <Route exact path="/videoconferences">
               <Videoconferences />
+            </Route>
+            <Route exact path="/messages">
+              <Messages />
             </Route>
           </Switch>
      </div>

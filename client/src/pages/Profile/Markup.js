@@ -9,6 +9,7 @@ const UserData = ({profile}) => {
     return <>
         <h1>{profile.firstname}</h1>
         <h1>{profile.lastname}</h1>
+        <div>{profile.email} </div>
     </>
     }
     else {

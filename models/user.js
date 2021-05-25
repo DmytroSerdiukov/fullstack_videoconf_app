@@ -31,7 +31,18 @@ export const Friendship = model('Friendship', Schema({
 }))
  
 
-
+export const Messages = model('Message', Schema({
+    myId: ObjectId,
+    userId: ObjectId,
+    lastMessage: { 
+        senderId: String,
+        body: String,
+    },
+    messages: [{
+        senderId: String,
+        body: String,
+    }]
+}))
 
 export const Videoconference = model('Videoconference', Schema({
     id: Schema.Types.ObjectId,

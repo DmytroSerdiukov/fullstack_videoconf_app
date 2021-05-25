@@ -3,21 +3,16 @@ import React from 'react';
 
 const FriendsPage = ({users}) => {
 
-    const filterFriends = (users) => {
-        console.log(users)
-
-        if (users === null)
-            return null
-        // const friends = users.filter( (u) => u.requester == Cookies.get('user'))
-        // return friends
-        return users
-    }
-
-    const friends = filterFriends(users)
-
     return <div>
-        {users === null || users.length == 0 ? 'U don have friends :D' : users.map(f => <div>{f.firstname}</div>)
-        // users.map( u => <div>{u.requester}</div>)
+        {users === null || users.length == 0 ? 'U don have friends :D' :
+         users.map(f => {
+            if (f.requester == Cookies.get('user'))
+                return <div style={{
+                    width: '300px',
+                    height: '100px',
+                    border: '1px solid black'
+                }}>{f.recipient}</div>
+            })
         }
     </div>
 }

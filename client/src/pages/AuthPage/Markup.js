@@ -53,10 +53,11 @@ const AuthForm = (props) => {
                     </div>
                     <Button
                         variant='contained'
-                        style={{width: '200px',
-                                marginBottom: '20px',
-                                marginTop: '20px',
-                                marginLeft: '50px'}}
+                        style={{
+                        width: '200px',
+                        marginBottom: '20px',
+                        marginTop: '20px',
+                        marginLeft: '50px'}}
                         type="submit"
                     >
                         Підтвердити
