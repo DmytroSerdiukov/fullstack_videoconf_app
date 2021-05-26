@@ -31,7 +31,7 @@ function App({userId, authIn, setAuth, setUserId}) {
   return (
     <BrowserRouter>
       <div>
-          <Navigation authIn={authIn}/>
+          <Navigation setAuth={setAuth} authIn={authIn}/>
           <Switch>
             <Route exact path="/">
               <AuthPage 

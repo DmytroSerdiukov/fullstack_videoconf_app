@@ -1,3 +1,4 @@
+import { Button } from '@material-ui/core'
 import Cookies from 'js-cookie'
 import React from 'react'
 import { Redirect } from 'react-router'
@@ -17,22 +18,24 @@ const UserData = ({profile}) => {
     }
 }
 
-const ProfileMarkup = ({profile, authIn, userId, setAuth}) => {
+const ProfileMarkup = ({profile, userId}) => {
 
-    const unloginUser = () => {
-        Cookies.remove('user')
-        setAuth(false)
-    }
 
     return <>
-        <div>
-            {
-                authIn ? <button onClick={unloginUser}>Unlogin</button> :
-                <Redirect to='/' />
-            }
-            <UserData profile={profile}/>
+        <div style={{
+                // backgroundColor: 'red',
+                width: '300px',
+                margin: '0 auto',
+                border: '3px solid blue',
+                marginTop: '100px',
+                borderRadius: '10px',
+                textAlign: 'center'
+            }}>
+        <UserData profile={profile}/>
+            
         </div>
     </>
+
 }
 
 export default ProfileMarkup

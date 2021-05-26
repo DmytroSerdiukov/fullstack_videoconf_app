@@ -14,7 +14,8 @@ const UserAPI = {
     },
     
     registerMe: async(data) => {
-        console.log(data)
+        if (data.email == '' || data.password == '')
+            return 0
         const body = {
             title:'USER_DATA',
             user: {

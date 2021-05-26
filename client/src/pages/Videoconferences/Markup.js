@@ -43,16 +43,17 @@ const Conference = ({label}) => {
     return <>{ !redirect ? 
         <>
             <div style={{
-                width: '500px',
+                width: '200px',
                 height: '100px',
                 border: '1px solid black',
-                margin: '10px'
+                backgroundColor: 'blue',
+                borderRadius: '5px',
+                color: 'white',
+                padding: '10px'
             }}>
-                <div>
+                <div style={{marginBottom: '25px'}}>
                     {label}
                 </div>
-            </div>
-
             <Button 
                 color='primary'
                 variant='contained'
@@ -61,6 +62,8 @@ const Conference = ({label}) => {
             >
                 Приєднатися до конференції
             </Button>
+            </div>
+
         </>
         : <Redirect to='/video' />
         }
@@ -83,7 +86,7 @@ const VideoconferencesMarkup = ({
         <div>
             {visible? <ReduxForm onSubmit={submit}/> : null}
         </div>
-        <div>
+        <div style={{width: '200px', margin: '0 auto'}}>
             {conferences === null ? 'Nothing' : conferences.map( c => <Conference label={c.conferenceLabel}/>)}
         </div>
     </div>)

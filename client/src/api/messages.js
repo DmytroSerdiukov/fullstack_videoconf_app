@@ -3,8 +3,8 @@ const URL = "http://localhost:5000"
 
 const MessagesAPI = {
     getUserMessages: async(id) => {
-        const messages = axios.post(`${URL}/messages/:id`)
-        return messages
+        // const messages = axios.post(`${URL}/messages/:id`)
+        // return null
     }
 }
 

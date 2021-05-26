@@ -29,8 +29,9 @@ const UsersPageContainer = () => {
     }
 
     return <>
-        <div>
-            <Link to='/friends'>Friends</Link>
+        <div style={{textAlign: 'center'}}>
+            <Link to='/friends' style={{textDecoration: 'none',
+            fontSize: '24px'}} >Друзі</Link>
         </div>
         <UsersPageMarkup 
         // onButtonClick={onButtonClick}

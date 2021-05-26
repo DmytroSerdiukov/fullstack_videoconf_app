@@ -5,11 +5,11 @@ import MessagesMarkup from './Markup';
 
 const MessagesContainer = () => {
 
-    const [ messages, setMessages] = useState()
-    useEffect( () => {
-        const data = getUserMessages()
-        setMessages(data)
-    }, [])
+    const [ messages, setMessages] = useState(null)
+    // useEffect( () => {
+    //     const data = getUserMessages()
+    //     setMessages(data)
+    // }, [])
 
     const getUserMessages = async() => {
         const messages = await MessagesAPI.getUserMessages()

@@ -48,6 +48,11 @@ startServer()
 socket.once('connection', sock => {
   console.log('user connected')
 
+  socket.on('join-room', (roomId, userId) => {
+    socket.join(roomId)  // Join the room
+    socket.broadcast.emit('user-connected', userId)
+  })
+  
   sock.on('disconnect', () => {
     console.log('user connected')
   })
