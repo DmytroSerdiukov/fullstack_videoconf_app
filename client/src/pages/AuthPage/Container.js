@@ -5,9 +5,8 @@ import {Redirect} from 'react-router-dom'
 import Cookies from 'js-cookie'
 
 
-const AuthPageContainer = ({userId, authIn, setAuth, setUserId}) => {
+const AuthPageContainer = ({authIn, setAuth, setUserId}) => {
     const authMe = async(data) => {
-
         await UserAPI.authMe(data)
         .then(res => {
             if (res.data.status == 1) {
