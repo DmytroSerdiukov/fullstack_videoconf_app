@@ -1,5 +1,5 @@
 import { Button, TextField } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import {Redirect} from 'react-router-dom'
 
@@ -36,12 +36,14 @@ const Form = (props) => <form onSubmit={props.handleSubmit}>
 
 </form>
 
-const Conference = ({label}) => {
+const Conference = ({id, label}) => {
 
     const [redirect, setRedirect] = useState(false)
-
+    
+    
     return <>{ !redirect ? 
         <>
+            <div>id:{id}</div>
             <div style={{
                 width: '200px',
                 height: '100px',
@@ -65,13 +67,14 @@ const Conference = ({label}) => {
             </div>
 
         </>
-        : <Redirect to='/video' />
+        : <Redirect to={`/video/${id}`} />
         }
     </>
 
 }
 
 const VideoconferencesMarkup = ({
+    me,
     conferences,
     createVideoconference
 }) => {
@@ -87,7 +90,13 @@ const VideoconferencesMarkup = ({
             {visible? <ReduxForm onSubmit={submit}/> : null}
         </div>
         <div style={{width: '200px', margin: '0 auto'}}>
-            {conferences === null ? 'Nothing' : conferences.map( c => <Conference label={c.conferenceLabel}/>)}
+            {conferences === null ? 'Nothing' : conferences.map( 
+                c => <Conference 
+                me={me}
+                id={c._id}
+                label={c.conferenceLabel}
+                
+                />)}
         </div>
     </div>)
 }

@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie';
 import React, { useEffect, useState } from 'react';
+import UserAPI from './../../api/api';
 import VideoconferencesAPI from '../../api/videoconferences';
 import VideoconferencesMarkup from './Markup';
 
@@ -11,18 +12,31 @@ import VideoconferencesMarkup from './Markup';
 
 
 const VideoconferencesContainer = () => {
-    
+    const [me, setMe] = useState(null)
     const [conferences, setConferences] = useState(null)
-    useEffect( () => {
-        getUserConferences()
-    }, [])
-    
+    const getData = async() => {
+        const userProfile = await UserAPI.getMyProfile(Cookies.get('user'))
+        console.log('profile', userProfile.data.profile)
+        const me = userProfile.data.profile
+        setMe(me)
+        console.log(me)
+
+    }
+
     const getUserConferences = async() => {
         const userId = Cookies.get('user')
         const conferences = await VideoconferencesAPI.getUserConferences(userId)
         setConferences(conferences.data.conferences)
         console.log(conferences.data.conferences)
     }
+
+    useEffect( () => {
+        getUserConferences()
+        getData()
+    }, [])
+    
+    
+
 
     const createVideoconference = async(conflabel) => {
         await VideoconferencesAPI.createConference(Cookies.get('user'), conflabel)
@@ -33,6 +47,7 @@ const VideoconferencesContainer = () => {
     }
 
     return <VideoconferencesMarkup
+        me={me}
         conferences={conferences}
         getUserConferences={getUserConferences}
         createVideoconference={createVideoconference}

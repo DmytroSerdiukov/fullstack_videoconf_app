@@ -52,7 +52,7 @@ const Navigation = ({ setAuth, authIn}) => {
                     </Button> :
                 <Redirect to='/' />}
         </div>
-        : null}
+        : <Redirect to='/' />}
          
     </div>
     </>

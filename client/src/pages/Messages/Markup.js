@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 
 
 const Message = () => {
+    // const 
     return <div style={{height: '100px'}}>
         <div>name</div>
         <div>body</div>

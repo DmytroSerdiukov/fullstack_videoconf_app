@@ -9,7 +9,7 @@ import ProfilePage from './pages/Profile/Container';
 import UsersPage from './pages/UsersPage/Container';
 import Navigation from './pages/Navigation/Markup';
 import FriendsPage from './pages/Friends/Container';
-import Videoconference from './pages/Videoconference/Container';
+import Videoconference from './pages/Videoconference/index';
 import {setAuth, setUserId} from './reducers/auth'
 import Videoconferences from './pages/Videoconferences/Container';
 import Messages from './pages/Messages/Container';
@@ -53,7 +53,7 @@ function App({userId, authIn, setAuth, setUserId}) {
             <Route exact path="/friends">
               <FriendsPage />
             </Route>
-            <Route exact path="/video">
+            <Route exact path="/video/:id">
               <Videoconference />
             </Route>
             <Route exact path="/videoconferences">
