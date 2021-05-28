@@ -36,7 +36,7 @@ const Navigation = ({ setAuth, authIn}) => {
             
             <NavLink path='/profile'>Профіль</NavLink>
             <NavLink path='/users'>Контакти</NavLink>
-            <NavLink path='/videoconferences'>Відеконференції</NavLink>
+            <NavLink path='/videoconferences'>Відеконференція</NavLink>
             <NavLink path='/messages'>Повідомлення</NavLink>
             {authIn ? <Button
                     onClick={unloginUser}
@@ -50,7 +50,8 @@ const Navigation = ({ setAuth, authIn}) => {
                     >
                         Вийти
                     </Button> :
-                <Redirect to='/' />}
+                <Redirect to='/' />
+            }
         </div>
         : <Redirect to='/' />}
          

@@ -11,7 +11,7 @@ import io from "socket.io-client"
 
 
 const socket = io.connect('http://localhost:5000')
-function App() {
+function Videochat() {
 	const [ me, setMe ] = useState("")
 	const [ stream, setStream ] = useState()
 	const [ receivingCall, setReceivingCall ] = useState(false)
@@ -40,7 +40,7 @@ function App() {
 			console.log(id)
 			setMe(id)
 		})
-
+ 
 		socket.on("callUser", (data) => {
 			setReceivingCall(true)
 			setCaller(data.from)
@@ -100,16 +100,15 @@ function App() {
 	}
 
 	return (
-		<>
-			<h1 style={{ textAlign: "center", color: '#fff' }}>Zoomish</h1>
-		<div className="container">
-			<div className="video-container">
-				<div className="video">
-					{stream &&  <video playsInline muted ref={myVideo} autoPlay style={{ width: "300px" }} />}
+		<div style={{width: '700px',margin: 'auto'}}>
+		<div className="container" >
+			<div className="video-container" >
+				<div className="video" >
+					{stream &&  <video playsInline muted ref={myVideo} autoPlay style={{ width: "300px" , marginLeft:'17%'}} />}
 				</div>
 				<div className="video">
 					{callAccepted && !callEnded ?
-					<video playsInline ref={userVideo} autoPlay style={{ width: "300px"}} />:
+					<video playsInline ref={userVideo} autoPlay style={{ width: "300px", marginLeft:'17%'}} />:
 					null}
 				</div>
 			</div>
@@ -159,8 +158,8 @@ function App() {
 				) : null}
 			</div>
 		</div>
-		</>
+		</div>
 	)
 }
 
-export default App
+export default Videochat

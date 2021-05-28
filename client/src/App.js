@@ -13,6 +13,7 @@ import Videoconference from './pages/Videoconference/index';
 import {setAuth, setUserId} from './reducers/auth'
 import Videoconferences from './pages/Videoconferences/Container';
 import Messages from './pages/Messages/Container';
+import Videochat from './pages/Videoconference/index';
 
 
 function App({userId, authIn, setAuth, setUserId}) {
@@ -57,7 +58,8 @@ function App({userId, authIn, setAuth, setUserId}) {
               <Videoconference />
             </Route>
             <Route exact path="/videoconferences">
-              <Videoconferences />
+              {/* <Videoconferences /> */}
+              <Videochat />
             </Route>
             <Route exact path="/messages">
               <Messages />
