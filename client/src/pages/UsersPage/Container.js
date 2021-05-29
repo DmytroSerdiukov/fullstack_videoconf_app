@@ -29,10 +29,10 @@ const UsersPageContainer = () => {
     }
 
     return <>
-        <div style={{textAlign: 'center'}}>
+        {/* <div style={{textAlign: 'center'}}>
             <Link to='/friends' style={{textDecoration: 'none',
             fontSize: '24px'}} >Друзі</Link>
-        </div>
+        </div> */}
         <UsersPageMarkup 
         // onButtonClick={onButtonClick}
         onFriendshipRequest = {makeFriendshipRequest}

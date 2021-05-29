@@ -7,7 +7,7 @@ import httpServer from 'http'
 import videoconfRoutes from './routes/videoconferences'
 import userRoutes from './routes/user'
 import {uuidV4} from 'uuid'
-
+import {Message} from './models/user'
 const app = express()
 const server = httpServer.createServer(app)
 const io = IO(server, {
@@ -53,6 +53,54 @@ io.on("connection", (socket) => {
 	socket.on("disconnect", () => {
 		socket.broadcast.emit("callEnded")
 	})
+
+  socket.on('new_message', async(data) => {
+    try {
+
+      console.log(data)
+      const {myId, userId, body} = data
+
+      const newMsg = {
+        myId: myId,
+        body: body,
+      }
+      const messages = await Message.find({myId: myId,
+        userId: userId})
+      if (messages) {
+        
+        const dialog = await Message.updateOne({
+          myId: myId,
+          userId: userId
+        }, {
+          lastMessage: { 
+            myId: myId,
+            body: body,
+          },
+          $push: {messages: newMsg}
+        }
+      )
+        
+      } else {
+
+      const message = new Message({
+        myId: myId,
+        userId: userId,
+        lastMessage: { 
+            myId: myId,
+            body: body,
+        },
+        messages: [{
+            myId: myId,
+            body: body,
+        }]
+      })
+      await message.save()
+      console.log(data)
+    }}
+     catch (e) {
+      console.log(e.message)
+    }
+  })
 
 	socket.on("callUser", (data) => {
 		io.to(data.userToCall).emit("callUser", { signal: data.signalData, from: data.from, name: data.name })

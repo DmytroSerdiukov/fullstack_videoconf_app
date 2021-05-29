@@ -31,15 +31,15 @@ export const Friendship = model('Friendship', Schema({
 }))
  
 
-export const Messages = model('Message', Schema({
+export const Message = model('Message', Schema({
     myId: ObjectId,
     userId: ObjectId,
     lastMessage: { 
-        senderId: String,
+        myId: String,
         body: String,
     },
     messages: [{
-        senderId: String,
+        myId: String,
         body: String,
     }]
 }))
@@ -51,3 +51,12 @@ export const Videoconference = model('Videoconference', Schema({
     users: [{type: Schema.Types.ObjectId, ref: 'User'}]
 }))
 
+// export const Message = model('Message', Schema({
+//     myId: ObjectId,
+//     yourId: ObjectId,
+//     lastMessage: String,
+//     messages: [{
+//         myId: ObjectId,
+//         message: String
+//     }]
+// }))
