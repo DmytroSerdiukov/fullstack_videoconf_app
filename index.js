@@ -102,6 +102,12 @@ io.on("connection", (socket) => {
     }
   })
 
+  socket.on('get_messages', async({myId}) => {
+    const messages = await Message.find({myId: myId})
+
+    socket.emit('get_messages', messages)
+  })
+
 	socket.on("callUser", (data) => {
 		io.to(data.userToCall).emit("callUser", { signal: data.signalData, from: data.from, name: data.name })
 	})
