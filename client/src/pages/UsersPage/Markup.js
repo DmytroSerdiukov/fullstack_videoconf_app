@@ -24,9 +24,10 @@ const User = ({id, firstname, lastname, FriendRequest}) => {
     const socket = io.connect('http://localhost:5000')
     
     socket.on('connection', socket => {
-
+        
     })
     return <div>
+    {    id === Cookies.get('user') ? null :<>
         <div 
             style={{
                 width: '300px',
@@ -73,8 +74,8 @@ const User = ({id, firstname, lastname, FriendRequest}) => {
                 >
                     Надіслати повідомлення
                 </Button>
-            </div> : null
-            }
+            </div> : null }
+    </>}
     </div>
 }
 
