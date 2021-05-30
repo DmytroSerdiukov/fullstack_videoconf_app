@@ -1,14 +1,16 @@
 import { Button, TextField } from '@material-ui/core'
-import React, { useState } from 'react'
+import Cookies from 'js-cookie'
+import React, { useEffect, useState } from 'react'
 import { Redirect } from 'react-router'
 import {Link} from 'react-router-dom'
+import { io } from 'socket.io-client'
 
 
-const Message = () => {
-    // const 
+const Message = ({lastMessage, myId, userId}) => {
     return <div style={{height: '100px'}}>
-        <div>name</div>
-        <div>body</div>
+        <div>{lastMessage.myId}</div>
+        <div>{lastMessage.body}</div>
+        {/* <div>{messages}</div> */}
         <Link to={'/messages/chat/'}>
             <Button 
                 color='primary'
@@ -20,8 +22,19 @@ const Message = () => {
     </div>
 }
 
-const MessagesMarkup = ({messages}) => {
-    console.log('msg', messages)
+const MessagesMarkup = () => {
+
+    const socket = io.connect('http://localhost:5000')
+
+    const [messages, setMessages] = useState(null)
+    console.log(messages)
+
+    useEffect( () => {
+        socket.emit('get_messages', {myId: Cookies.get('user')})
+    })
+    socket.on('get_messages', data => setMessages(data))
+    
+    // console.log('msg', messages.lastMessage)
     const [form, setForm] = useState(false)
     const getMessages = (messages) => {
         if (messages === null ||
@@ -31,7 +44,11 @@ const MessagesMarkup = ({messages}) => {
             return null
             // return 'No messages'
         }
-        const list = messages.map( m => <Message/>)
+        const list = messages.map( m => <Message
+            lastMessage={m.lastMessage}
+            myId={m.myId}
+            userId={m.userId}    
+        />)
         return list
     }
     
